@@ -229,8 +229,9 @@ The SDK throws `AirlineStreamError` with these properties:
 Error codes: `INVALID_CODE`, `INVALID_TYPE`, `INVALID_DIMENSIONS`, `INVALID_FORMAT`, `HTTP_400`, `HTTP_401`, `HTTP_403`, `HTTP_404`, `HTTP_429`, `HTTP_502`.
 
 The middleware translates errors to safe HTTP responses:
-- `401`/`403` upstream → `502 Logo service configuration error` (doesn't leak auth details)
-- `429` upstream → `503 Logo service temporarily unavailable`
+- `401` upstream → `502 Logo service configuration error` (doesn't leak auth details)
+- `403` upstream → `403` with JSON `{"error": "Your Free plan supports up to 64×64px. Requested 200×200px."}` (plan-limit details passed through)
+- `429` upstream → `429` with JSON `{"error": "Rate limit exceeded. Upgrade your plan for higher throughput."}` (rate-limit details passed through)
 - `404` upstream → `404 Airline not found`
 
 ---
