@@ -1,6 +1,6 @@
 {
   "name": "airlinestream-api-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Node.js SDK for the AirlineStream Airline Logo API — serve airline logos on your site without exposing API keys",
   "main": "src/index.js",
   "exports": {
