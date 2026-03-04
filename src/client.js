@@ -58,12 +58,16 @@ function createClient({ apiKey, baseUrl } = {}) {
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
+      let parsed;
+      try { parsed = JSON.parse(body); } catch { parsed = null; }
+      const apiMsg = (parsed && parsed.error) || body;
+
       const messages = {
-        400: body || 'Bad request — invalid parameters',
+        400: apiMsg || 'Bad request — invalid parameters',
         401: 'Unauthorized — check your API key',
-        403: body || 'Forbidden — your plan does not allow this resource',
+        403: apiMsg || 'Forbidden — your plan does not allow this resource',
         404: 'Airline not found',
-        429: 'Rate limit exceeded — upgrade your plan or reduce request rate',
+        429: apiMsg || 'Rate limit exceeded — upgrade your plan or reduce request rate',
         502: 'AirlineStream upstream error',
       };
       throw new AirlineStreamError(

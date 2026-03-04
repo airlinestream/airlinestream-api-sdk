@@ -1,8 +1,8 @@
 # AirlineStream API SDK
 
 [![npm version](https://img.shields.io/npm/v/airlinestream-api-sdk.svg)](https://www.npmjs.com/package/airlinestream-api-sdk)
-[![license](https://img.shields.io/npm/l/airlinestream-api-sdk.svg)](https://github.com/airlinestream/airlinestream-api-sdk/blob/main/LICENSE)
-[![node](https://img.shields.io/node/v/airlinestream-api-sdk.svg)](https://nodejs.org)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/airlinestream/airlinestream-api-sdk/blob/main/LICENSE)
+[![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org)
 
 **Official Node.js SDK for the [AirlineStream](https://airlinestream.dev) Airline Logo API.**
 
