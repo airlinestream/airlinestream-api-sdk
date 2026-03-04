@@ -1,5 +1,5 @@
 /**
- * Next.js API Route example for airlinestream-api-sdk.
+ * Next.js API Route example for airlinestream-js-sdk.
  *
  * File: pages/api/logos/[...path].js  (or app/api/logos/[...path]/route.js)
  *
@@ -9,7 +9,7 @@
  *   <img src="/api/logos/UA/s/200x200.png" alt="United Airlines" />
  */
 
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const logos = airlinestream({
   apiKey: process.env.AIRLINESTREAM_API_KEY,

@@ -12,7 +12,7 @@ const { createMiddleware } = require('./middleware');
  * @returns {{ logo: Function, middleware: Function }}
  *
  * @example
- * const airlinestream = require('airlinestream-api-sdk');
+ * const airlinestream = require('airlinestream-js-sdk');
  * const logos = airlinestream({ apiKey: process.env.AIRLINESTREAM_API_KEY });
  *
  * // Mount as Express middleware

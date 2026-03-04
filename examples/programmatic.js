@@ -1,5 +1,5 @@
 /**
- * Programmatic usage example for airlinestream-api-sdk.
+ * Programmatic usage example for airlinestream-js-sdk.
  *
  * Fetch airline logos as Buffers for use in PDF generation,
  * email templates, image processing, or saving to disk.
@@ -12,7 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const logos = airlinestream({
   apiKey: process.env.AIRLINESTREAM_API_KEY,

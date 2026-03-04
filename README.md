@@ -1,6 +1,6 @@
-# AirlineStream API SDK
+# AirlineStream JS SDK
 
-[![npm version](https://img.shields.io/npm/v/airlinestream-api-sdk.svg)](https://www.npmjs.com/package/airlinestream-api-sdk)
+[![npm version](https://img.shields.io/npm/v/airlinestream-js-sdk.svg)](https://www.npmjs.com/package/airlinestream-js-sdk)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/airlinestream/airlinestream-api-sdk/blob/main/LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org)
 
@@ -26,12 +26,12 @@ No extra server. No extra port. No exposed secrets. Just one middleware call.
 ## Quick Start
 
 ```bash
-npm install airlinestream-api-sdk
+npm install airlinestream-js-sdk
 ```
 
 ```js
 const express = require('express');
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const app = express();
 
@@ -72,7 +72,7 @@ The SDK forwards each request to the AirlineStream API with your `Authorization:
 ## Installation
 
 ```bash
-npm install airlinestream-api-sdk
+npm install airlinestream-js-sdk
 ```
 
 Requires **Node.js 18** or later (for built-in `fetch`).
@@ -87,7 +87,7 @@ The recommended approach. Mount the middleware on a route prefix and use `<img>`
 
 ```js
 const express = require('express');
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const app = express();
 
@@ -107,7 +107,7 @@ app.use('/logos', logos.middleware());
 Create `pages/api/logos/[...path].js`:
 
 ```js
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const logos = airlinestream({
   apiKey: process.env.AIRLINESTREAM_API_KEY,
@@ -140,7 +140,7 @@ Then in your components: `<img src="/api/logos/UA/s/200x200.png" />`
 Fetch logo buffers directly for use in PDF generation, email templates, or image pipelines:
 
 ```js
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 const fs = require('fs');
 
 const logos = airlinestream({

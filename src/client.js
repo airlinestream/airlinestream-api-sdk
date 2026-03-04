@@ -16,7 +16,7 @@ const VALID_FORMATS = new Set(['png', 'jpg', 'gif', 'svg']);
 
 function createClient({ apiKey, baseUrl } = {}) {
   if (!apiKey || typeof apiKey !== 'string') {
-    throw new Error('airlinestream-api-sdk: apiKey is required');
+    throw new Error('airlinestream-js-sdk: apiKey is required');
   }
 
   const base = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');

@@ -1,5 +1,5 @@
 /**
- * Express.js integration example for airlinestream-api-sdk.
+ * Express.js integration example for airlinestream-js-sdk.
  *
  * This creates a simple Express server that proxies airline logo requests
  * to the AirlineStream API. Your HTML templates use local <img> tags and
@@ -13,7 +13,7 @@
 'use strict';
 
 const express = require('express');
-const airlinestream = require('airlinestream-api-sdk');
+const airlinestream = require('airlinestream-js-sdk');
 
 const app = express();
 
