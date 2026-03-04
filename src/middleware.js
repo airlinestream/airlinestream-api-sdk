@@ -61,13 +61,18 @@ function createMiddleware(client) {
       const status = err.statusCode || 502;
 
       // Map upstream errors to appropriate client-facing responses
-      if (status === 401 || status === 403) {
+      if (status === 401) {
         // Don't leak auth details to the browser
         res.writeHead(502);
-        res.end('Logo service configuration error');
+        res.end('Logo service configuration error — check your API key');
+      } else if (status === 403) {
+        // Plan limit errors — pass through so developers/users see what to upgrade
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message }));
       } else if (status === 429) {
-        res.writeHead(503);
-        res.end('Logo service temporarily unavailable');
+        // Rate limit — pass through with upgrade hint
+        res.writeHead(429, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message }));
       } else if (status === 404) {
         res.writeHead(404);
         res.end('Airline not found');

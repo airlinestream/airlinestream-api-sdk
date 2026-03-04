@@ -157,6 +157,24 @@ describe('client.logo()', () => {
 
     globalThis.fetch = originalFetch;
   });
+
+  it('parses JSON error body from API for 403', async () => {
+    const apiError = 'Your Free plan supports up to 64×64px. Requested 200×200px.';
+    globalThis.fetch = async () => ({
+      ok: false,
+      status: 403,
+      text: async () => JSON.stringify({ error: apiError }),
+    });
+
+    const client = createClient({ apiKey: 'sk_test' });
+
+    await assert.rejects(
+      () => client.logo('UA', { type: 's', width: 200, height: 200, format: 'png' }),
+      (err) => err instanceof AirlineStreamError && err.statusCode === 403 && err.message === apiError,
+    );
+
+    globalThis.fetch = originalFetch;
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -252,7 +270,7 @@ describe('createMiddleware', () => {
     assert.equal(res._status, 404);
   });
 
-  it('returns 502 for auth errors (does not leak)', async () => {
+  it('returns 502 for auth errors (does not leak key)', async () => {
     const fakeClient = {
       logo: async () => { throw new AirlineStreamError('Unauthorized', 401, 'HTTP_401'); },
     };
@@ -264,14 +282,31 @@ describe('createMiddleware', () => {
     assert.ok(!res._body.includes('Unauthorized'));
   });
 
-  it('returns 503 for rate limit errors', async () => {
+  it('returns 403 with plan-limit message for tier errors', async () => {
+    const msg = 'Your Free plan supports up to 64×64px. Requested 200×200px.';
     const fakeClient = {
-      logo: async () => { throw new AirlineStreamError('Rate limited', 429, 'HTTP_429'); },
+      logo: async () => { throw new AirlineStreamError(msg, 403, 'HTTP_403'); },
     };
 
     const mw = createMiddleware(fakeClient);
     const res = mockRes();
     await mw(mockReq('GET', '/UA/s/200x200.png'), res);
-    assert.equal(res._status, 503);
+    assert.equal(res._status, 403);
+    const body = JSON.parse(res._body);
+    assert.equal(body.error, msg);
+  });
+
+  it('returns 429 with rate-limit message', async () => {
+    const msg = 'Rate limit exceeded. Upgrade your plan for higher throughput.';
+    const fakeClient = {
+      logo: async () => { throw new AirlineStreamError(msg, 429, 'HTTP_429'); },
+    };
+
+    const mw = createMiddleware(fakeClient);
+    const res = mockRes();
+    await mw(mockReq('GET', '/UA/s/200x200.png'), res);
+    assert.equal(res._status, 429);
+    const body = JSON.parse(res._body);
+    assert.equal(body.error, msg);
   });
 });
