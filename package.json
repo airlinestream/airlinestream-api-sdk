@@ -1,0 +1,47 @@
+{
+  "name": "airlinestream-api-sdk",
+  "version": "1.0.0",
+  "description": "Official Node.js SDK for the AirlineStream Airline Logo API — serve airline logos on your site without exposing API keys",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./middleware": "./src/middleware.js",
+    "./client": "./src/client.js"
+  },
+  "files": [
+    "src/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test/client.test.js"
+  },
+  "keywords": [
+    "airline",
+    "airline-logo",
+    "airline-logos",
+    "airlinestream",
+    "aviation",
+    "iata",
+    "icao",
+    "logo-api",
+    "travel",
+    "flight",
+    "airline-branding",
+    "logo-cdn",
+    "airline-images"
+  ],
+  "author": "AirlineStream <support@airlinestream.dev>",
+  "license": "MIT",
+  "homepage": "https://airlinestream.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airlinestream/airlinestream-api-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/airlinestream/airlinestream-api-sdk/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
